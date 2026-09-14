@@ -40,6 +40,20 @@ Live2D Cubism 负责立绘、动作与表情，Python 侧用 FastAPI 提供对�
 
 <sub>仓库暂为私有，整理完成后再考虑开源。</sub>
 
+### 🌉 [pyqt-live2d-bridge](https://github.com/canyueY/pyqt-live2d-bridge)
+
+把 Live2D Cubism 在 **PyQt5** 里的渲染、动作与表情绑定，从桌宠主程序里剥出来的独立库。
+
+做法很朴素：**只提供渲染引擎，不提供窗口部件**——宿主可以是任何 `QOpenGLWidget`，
+这样它能嵌进任意 Qt 应用，而不是绑死在某个项目上。模型路径也不写死
+（显式参数 > 环境变量 > 约定布局兜底），动作目录 / 表情合成 / 情绪映射这些纯数据部分
+不依赖 GL 上下文，可以单独使用。
+
+覆盖：GL 画布与眨眼、呼吸、鼠标跟随、命中区点击、动作分组与时段可用性、口型同步、
+表情与姿势的参数合成、情绪标签到表情 / 眼泪 / 脸红 / 姿势的映射。
+
+`MIT` · 24 项独立可用性测试（含真实 GL 出帧）· 不含任何模型素材
+
 ### ⛏️ [LittleMaidReengagedFirisPatch](https://github.com/canyueY/LittleMaidReengagedFirisPatch)
 
 Minecraft 1.12.2 的女仆模组补丁。
