@@ -122,6 +122,27 @@ Minecraft 1.12.2 的女仆模组补丁。
 自己判断该不该拆、许可能不能用、边界划在哪，再用测试把行为钉死——
 所以每个包都带着一份能独立跑的测试。
 
+## 📊 GitHub 统计
+
+<p align="center">
+  <img src="cards/stats.svg" alt="统计概览" width="860">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/stars/canyueY?label=Stars&color=4F8EF7&labelColor=0d1117" alt="Stars">
+  <img src="https://img.shields.io/github/followers/canyueY?label=Followers&color=4F8EF7&labelColor=0d1117" alt="Followers">
+  <img src="https://img.shields.io/badge/Python-100%25-3776AB?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/github/last-commit/canyueY/window-locator?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
+</p>
+
+> 为什么不用 `github-readme-stats` 那类现成卡片：它们的域名（`*.vercel.app`）
+> 在国内被 DNS 污染，换台机器打开就是裂图；而且它们默认展示 total stars 与
+> 连续提交天数——对这里要么是空白，要么会把 fork 上游的历史算成本人贡献。
+> 上面这张图是仓库里的 SVG，不依赖任何第三方服务。
+>
+> 数字口径：**392** = 五个包 `tests/` 下可独立运行的测试函数总数
+> （`pyqt-live2d-bridge` 是自跑的自检脚本，按 `check()` 项计）。
+
 ## 🧰 技术栈
 
 ![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="108" viewBox="0 0 860 108" role="img">
+<rect x="0.5" y="0.5" width="859" height="107" rx="8" fill="#0d1117" stroke="#30363d"/>
+<text x="116.5" y="50" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="30" font-weight="600" fill="#4F8EF7">5</text>
+<text x="116.5" y="76" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="13" fill="#8b949e">开源组件</text>
+<text x="325.5" y="50" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="30" font-weight="600" fill="#4F8EF7">392</text>
+<text x="325.5" y="76" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="13" fill="#8b949e">测试用例</text>
+<line x1="221.0" y1="28" x2="221.0" y2="80" stroke="#30363d" stroke-width="1"/>
+<text x="534.5" y="50" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="30" font-weight="600" fill="#4F8EF7">100%</text>
+<text x="534.5" y="76" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="13" fill="#8b949e">Python</text>
+<line x1="430.0" y1="28" x2="430.0" y2="80" stroke="#30363d" stroke-width="1"/>
+<text x="743.5" y="50" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="30" font-weight="600" fill="#4F8EF7">4</text>
+<text x="743.5" y="76" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif,'PingFang SC','Microsoft YaHei'" font-size="13" fill="#8b949e">年 GitHub</text>
+<line x1="639.0" y1="28" x2="639.0" y2="80" stroke="#30363d" stroke-width="1"/>
+</svg>
