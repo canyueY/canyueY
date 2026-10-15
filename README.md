@@ -19,7 +19,7 @@
 
 | 组件 | 解决什么问题 | 许可 |
 | :--- | :--- | :--- |
-| **[agent-gate](https://github.com/canyueY/agent-gate)** | 给 LLM Agent 的工具调用装一道 fail-closed 权限闸门 | AGPL-3.0 |
+| **[AgentLock](https://github.com/canyueY/agent-gate)** | 给 LLM Agent 的工具调用装一道 fail-closed 权限闸门 | AGPL-3.0 |
 | **[window-locator](https://github.com/canyueY/window-locator)** | Windows 显示器几何与前台窗口查询，全部用物理像素 | AGPL-3.0 |
 | **[netease-cdp](https://github.com/canyueY/netease-cdp)** | 用 CDP 驱动网易云桌面客户端（不碰 API、不需登录） | AGPL-3.0 |
 | **[context-budget](https://github.com/canyueY/context-budget)** | 把对话历史裁到 token 预算内，保留人设丢掉最旧的轮次 | AGPL-3.0 |
