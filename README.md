@@ -105,6 +105,56 @@ Minecraft 1.12.2 的女仆模组补丁。
 
 ---
 
+## 📓 开发日志
+
+> 桌宠最近在做的事。仓库暂为私有，这里只写能落地验证的部分。
+
+### 2026-10-22 · 她开始看得见你在玩什么、在看什么
+
+这一轮的主线是**观察层**：让她知道主人此刻在游戏里做什么、在 B 站看什么，并且能顺着话头接下去。
+
+- **P6 · Minecraft 观察**：客户端 Mod 经 `ws://127.0.0.1:28565/minecraft/ws` 把事件推给本地服务，
+  服务侧维护实时状态、物品 registry、容器交互图、行为与 Episode 采样，再接进对话注入与主动搭话；
+  管理后台多了「Minecraft 观察」面板。
+- **P7 · 视频观察**：读 B 站页面判断「正在看什么」，维护观看会话 → 按关注度阈值写临时记忆 →
+  推理前注入对话。最早靠 CDP 调试端口扫标签页，要手动开端口、权限弹窗，窗口标题还常对不上。
+- **10-22 · 把 CDP 换成浏览器插件**：MV3 扩展 `extensions/murasame_bilibili`，content script 抓 BV、
+  标题、播放器字幕、播放/暂停，每 4 秒上报 `/video/extension/heartbeat`，后台标签页也能报状态；
+  插件数据新鲜时优先于 CDP（`prefer_over_cdp`）。另外加了 28566 端口的唤醒服务，插件安装或浏览器
+  启动时请求 `/ensure-api`，由它把 `api.py` 拉起来。
+
+**三处会「假死」的地方**
+
+- `api.py` 是单进程单事件循环，async 端点里任何同步网络调用都会冻住所有接口（包括 `/health`），
+  现在一律 `asyncio.to_thread`。其中一处是运维助手探测**本进程自己**的 `/health`，构成自调用死锁：
+  实测 12.48s 且探测失败，改后 4.97s 且成功。
+- `/video/status` 原本在 async 端点里内联跑完整 `observe_tick`（CDP + 截图 + 视觉推理），而
+  `video_admin_snapshot()` 自己也调一次，等于一次请求跑两遍；改成后台线程 + 防抖。
+- `SessionTracker.tick` 全程持锁做网络 I/O（最长 600s），改为锁内只取快照；临时记忆不再全量读文件，
+  改为 `seek` 只读尾部 384KB。
+
+**MC 侧两个真 bug**
+
+- Mod 从来没构建成功过：`connectBlocking` 没有单参重载、Fabric 没有 `ScreenEvents.BEFORE_CLOSE`、
+  javac 在中文 Windows 上按 GBK 解中文注释、NeoForge 没有 `reobfJar`。逐层修完才产出
+  `murasame-mc-observer-0.1.0.jar`。
+- registry 是 **100% 被拒**：Python 侧按字符数限 256K，Java 侧按条目数发 12000 条（≈984KB），
+  超限后客户端置位就不再重试。改成 800 条一片、带 `uploadId` 合并上报，单帧上限放宽到 512KB。
+
+**零散几处**
+
+- 天气 / 美食新增 `weather_home_city`；IP 定位城市与目标不一致时，不再拿本地坐标去搜外地。
+- 记忆编排接入 `minecraft_game` 层：游戏记忆可召回，回合结束后落盘。
+- 任务队列加上限（32）并回收僵尸 `running`（`timeout + 180s`）。
+- 运维助手能识别被安全软件掏空的 `bitsandbytes`，改走本地 wheel 离线修复。
+- 工具沙箱从「整个桌面」收紧到 `data/agent/notes`——此前 `..` 被解析成项目根的上一级。
+- 回归跑器：单个脚本卡死不再中断整轮，12 个从未被跑过的 live 验证脚本纳入 `--live`。
+- 同批拆出 `netease-cdp` / `window-locator` / `context-budget` 三个零依赖包，加上 `agent-gate`，见上面的组件表。
+
+<sub>对应 17 条变更记录（2026-09-20 → 10-15）；插件与唤醒服务是之后补的，还没归档进日志。</sub>
+
+---
+
 ## 👤 关于我
 
 我是 **canyueY**（胃疾癣）。主要做 Python 桌面应用。
