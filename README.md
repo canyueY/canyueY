@@ -7,19 +7,19 @@
 </p>
 
 <p align="center">
-  <strong>Python 桌面应用 · Live2D 集成 · AI 角色交互</strong><br>
-  <sub>把桌宠里能复用的部分，一个个拆成独立开源库</sub>
+  <strong>Python 桌面应用 · Live2D 集成 · AI 角色交互 · DeepSeek Harness 插件</strong><br>
+  <sub>把桌宠里能复用的部分拆成独立开源库，再做成可安装的 dsh 插件</sub>
 </p>
 
 ---
 
-## 📦 开源组件
+## 📦 开源组件（Python）
 
 从桌宠项目里剥出来的通用件。每个都能单独用，不依赖桌宠本体。
 
 | 组件 | 解决什么问题 | 许可 |
 | :--- | :--- | :--- |
-| **[AgentLock](https://github.com/canyueY/agent-gate)** | 给 LLM Agent 的工具调用装一道 fail-closed 权限闸门 | AGPL-3.0 |
+| **[agent-gate](https://github.com/canyueY/agent-gate)** | 给 LLM Agent 的工具调用装一道 fail-closed 权限闸门 | AGPL-3.0 |
 | **[window-locator](https://github.com/canyueY/window-locator)** | Windows 显示器几何与前台窗口查询，全部用物理像素 | AGPL-3.0 |
 | **[netease-cdp](https://github.com/canyueY/netease-cdp)** | 用 CDP 驱动网易云桌面客户端（不碰 API、不需登录） | AGPL-3.0 |
 | **[context-budget](https://github.com/canyueY/context-budget)** | 把对话历史裁到 token 预算内，保留人设丢掉最旧的轮次 | AGPL-3.0 |
@@ -80,6 +80,28 @@ DPI 上下文。
 
 ---
 
+## 🔌 DeepSeek Harness 插件
+
+对应上面四个 Python 库的 **独立 npm 插件包**（分支 `plugin/dsh`），可直接：
+
+```bash
+dsh plugin --profile web add github:canyueY/<包名>#plugin/dsh
+```
+
+| 插件 | 对应能力 | 主要工具 |
+| :--- | :--- | :--- |
+| **[dsh-agent-gate](https://github.com/canyueY/dsh-agent-gate)** | 权限闸门 | `gate_check` / `gate_check_path` / `gate_policy` |
+| **[dsh-context-budget](https://github.com/canyueY/dsh-context-budget)** | 上下文裁剪 | `trim_context` / `estimate_context_tokens` |
+| **[dsh-window-locator](https://github.com/canyueY/dsh-window-locator)** | 显示器 / 前台窗 | `list_monitors` / `foreground_window` / `desktop_snapshot` |
+| **[dsh-netease-cdp](https://github.com/canyueY/dsh-netease-cdp)** | 网易云控制 | `netease_probe` / `netease_now_playing` / `netease_play` / `next` / `prev` |
+| **[dsh-video-storyboard](https://github.com/canyueY/dsh-video-storyboard)** | 视频分镜（fork） | `video_storyboard` / `video_zoom` / `video_probe` |
+
+形态对齐官方插件约定：`package.json` 的 `dsh.bundle` + `cordis.patch.yml` + `defineTool`。
+`agent-gate` / `context-budget` 为纯 JS 移植；`window-locator` 经 PowerShell 调 Win32（物理像素）；
+`netease-cdp` 用 Node `ws` 直连 CDP。许可仍为 AGPL-3.0-or-later。
+
+---
+
 ## 🚀 主要项目
 
 ### 🎭 MurasamePet（丛雨桌宠）
@@ -89,9 +111,10 @@ Live2D Cubism 负责立绘、动作与表情，Python 侧用 FastAPI 提供对�
 另有一套 **Vue 3 + Pinia + naive-ui** 的 Web 管理后台（70+ 路由）用于调试与配置。
 
 覆盖的能力包括：多动作组与表情绑定、情绪驱动表情、点击部位互动、语音合成与口型同步、
-屏幕感知主动发言、长期记忆，以及番剧 / 天气 / 美食 / 音乐等本地路由。
+屏幕感知主动发言、长期记忆，以及番剧 / 天气 / 美食 / 音乐等本地路由；
+近期又补了 Minecraft / B 站视频观察层，以及对接本机 DeepSeek Harness 的能力面。
 
-上面那五个开源组件就是从这个项目里陆续拆出来的。
+上面那些开源组件与 dsh 插件，就是从这个项目里陆续拆出来的。
 
 > **来源说明**：本项目以 [kuxiaowo/AIpet-Murasame](https://github.com/kuxiaowo/AIpet-Murasame)（AGPL-3.0）为起点继续开发，
 > 上游原始著作权归其作者所有；相对上游的主要修改见项目 `CHANGELOG.md`。
@@ -101,13 +124,20 @@ Live2D Cubism 负责立绘、动作与表情，Python 侧用 FastAPI 提供对�
 
 ### ⛏️ [LittleMaidReengagedFirisPatch](https://github.com/canyueY/LittleMaidReengagedFirisPatch)
 
-Minecraft 1.12.2 的女仆模组补丁。
+Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 
 ---
 
 ## 📓 开发日志
 
 > 桌宠最近在做的事。仓库暂为私有，这里只写能落地验证的部分。
+
+### 2026-10-28 · 四个组件做成 DeepSeek Harness 插件
+
+把 `agent-gate` / `context-budget` / `window-locator` / `netease-cdp` 各自做成独立的
+`dsh-*` npm 仓库，默认分支 `plugin/dsh`，可按官方方式 `dsh plugin add`。
+同时维护视频分镜 fork [`dsh-video-storyboard`](https://github.com/canyueY/dsh-video-storyboard)。
+各仓库 GitHub 简介统一改为中文。
 
 ### 2026-10-22 · 她开始看得见你在玩什么、在看什么
 
@@ -157,7 +187,7 @@ Minecraft 1.12.2 的女仆模组补丁。
 
 ## 👤 关于我
 
-我是 **canyueY**（胃疾癣）。主要做 Python 桌面应用。
+我是 **canyueY**（胃疾癣）。主要做 Python 桌面应用，最近也在写 DeepSeek Harness 的 Node 插件。
 
 这个桌宠的起点很普通：我在网上刷到上游项目
 [AIpet-Murasame](https://github.com/kuxiaowo/AIpet-Murasame) 的演示视频，
@@ -181,8 +211,8 @@ Minecraft 1.12.2 的女仆模组补丁。
 <p align="center">
   <img src="https://img.shields.io/github/stars/canyueY?label=Stars&color=4F8EF7&labelColor=0d1117" alt="Stars">
   <img src="https://img.shields.io/github/followers/canyueY?label=Followers&color=4F8EF7&labelColor=0d1117" alt="Followers">
-  <img src="https://img.shields.io/badge/Python-100%25-3776AB?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/github/last-commit/canyueY/window-locator?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
+  <img src="https://img.shields.io/badge/Python-JS-3776AB?logo=python&logoColor=white" alt="Python / JS">
+  <img src="https://img.shields.io/github/last-commit/canyueY/dsh-agent-gate?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
 </p>
 
 > 为什么不用 `github-readme-stats` 那类现成卡片：它们的域名（`*.vercel.app`）
@@ -190,16 +220,19 @@ Minecraft 1.12.2 的女仆模组补丁。
 > 连续提交天数——对这里要么是空白，要么会把 fork 上游的历史算成本人贡献。
 > 上面这张图是仓库里的 SVG，不依赖任何第三方服务。
 >
-> 数字口径：**392** = 五个包 `tests/` 下可独立运行的测试函数总数
+> 数字口径：**392** = 五个 Python 包 `tests/` 下可独立运行的测试函数总数
 > （`pyqt-live2d-bridge` 是自跑的自检脚本，按 `check()` 项计）。
+> dsh 插件另有各自的 `node --test`，未计入该数字。
 
 ## 🧰 技术栈
 
 ![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-20+-339933?logo=nodedotjs&logoColor=white)
 ![PyQt5](https://img.shields.io/badge/PyQt5-Desktop-41CD52?logo=qt&logoColor=white)
 ![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF7BAC)
 ![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-Harness-4F8EF7)
 ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?logo=powershell&logoColor=white)
 
 ## 📫 联系
