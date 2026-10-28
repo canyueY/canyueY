@@ -82,6 +82,8 @@ DPI 上下文。
 
 ## 🔌 DeepSeek Harness 插件
 
+托管在组织 [DSH-Raising-Plan](https://github.com/DSH-Raising-Plan)。
+
 对应上面四个 Python 库的 **独立 npm 插件包**（分支 `plugin/dsh`），可直接：
 
 ```bash
@@ -90,11 +92,11 @@ dsh plugin --profile web add github:canyueY/<包名>#plugin/dsh
 
 | 插件 | 对应能力 | 主要工具 |
 | :--- | :--- | :--- |
-| **[dsh-agent-gate](https://github.com/canyueY/dsh-agent-gate)** | 权限闸门 | `gate_check` / `gate_check_path` / `gate_policy` |
-| **[dsh-context-budget](https://github.com/canyueY/dsh-context-budget)** | 上下文裁剪 | `trim_context` / `estimate_context_tokens` |
-| **[dsh-window-locator](https://github.com/canyueY/dsh-window-locator)** | 显示器 / 前台窗 | `list_monitors` / `foreground_window` / `desktop_snapshot` |
-| **[dsh-netease-cdp](https://github.com/canyueY/dsh-netease-cdp)** | 网易云控制 | `netease_probe` / `netease_now_playing` / `netease_play` / `next` / `prev` |
-| **[dsh-video-storyboard](https://github.com/canyueY/dsh-video-storyboard)** | 视频分镜（fork） | `video_storyboard` / `video_zoom` / `video_probe` |
+| **[dsh-agent-gate](https://github.com/DSH-Raising-Plan/dsh-agent-gate)** | 权限闸门 | `gate_check` / `gate_check_path` / `gate_policy` |
+| **[dsh-context-budget](https://github.com/DSH-Raising-Plan/dsh-context-budget)** | 上下文裁剪 | `trim_context` / `estimate_context_tokens` |
+| **[dsh-window-locator](https://github.com/DSH-Raising-Plan/dsh-window-locator)** | 显示器 / 前台窗 | `list_monitors` / `foreground_window` / `desktop_snapshot` |
+| **[dsh-netease-cdp](https://github.com/DSH-Raising-Plan/dsh-netease-cdp)** | 网易云控制 | `netease_probe` / `netease_now_playing` / `netease_play` / `next` / `prev` |
+| **[dsh-video-storyboard](https://github.com/DSH-Raising-Plan/dsh-video-storyboard)** | 视频分镜（fork） | `video_storyboard` / `video_zoom` / `video_probe` |
 
 形态对齐官方插件约定：`package.json` 的 `dsh.bundle` + `cordis.patch.yml` + `defineTool`。
 `agent-gate` / `context-budget` 为纯 JS 移植；`window-locator` 经 PowerShell 调 Win32（物理像素）；
@@ -136,7 +138,7 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 
 把 `agent-gate` / `context-budget` / `window-locator` / `netease-cdp` 各自做成独立的
 `dsh-*` npm 仓库，默认分支 `plugin/dsh`，可按官方方式 `dsh plugin add`。
-同时维护视频分镜 fork [`dsh-video-storyboard`](https://github.com/canyueY/dsh-video-storyboard)。
+同时维护视频分镜 fork [`dsh-video-storyboard`](https://github.com/DSH-Raising-Plan/dsh-video-storyboard)。
 各仓库 GitHub 简介统一改为中文。
 
 ### 2026-10-22 · 她开始看得见你在玩什么、在看什么
