@@ -242,12 +242,6 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
   <img src="https://img.shields.io/badge/Python-JS-3776AB?logo=python&logoColor=white" alt="Python / JS">
   <img src="https://img.shields.io/github/last-commit/canyueY/dsh-agent-gate?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
 </p>
-
-> 为什么不用 `github-readme-stats` 那类现成卡片：它们的域名（`*.vercel.app`）
-> 在国内被 DNS 污染，换台机器打开就是裂图；而且它们默认展示 total stars 与
-> 连续提交天数——对这里要么是空白，要么会把 fork 上游的历史算成本人贡献。
-> 上面这张图是仓库里的 SVG，不依赖任何第三方服务。
->
 > 数字口径：**392** = 五个 Python 包 `tests/` 下可独立运行的测试函数总数
 > （`pyqt-live2d-bridge` 是自跑的自检脚本，按 `check()` 项计）。
 > dsh 插件另有各自的 `node --test`，未计入该数字。
