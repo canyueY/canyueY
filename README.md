@@ -215,7 +215,7 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 
 ## 👤 关于我
 
-我是 **canyueY**（胃疾癣）。主要做 Python 桌面应用，最近也在写 DeepSeek Harness 的 Node 插件。
+我是 **胃疾癣**（也是canyueY）。主要做 Python 桌面应用，最近也在写 DeepSeek Harness 的 Node 插件。
 
 这个桌宠的起点很普通：我在网上刷到上游项目
 [AIpet-Murasame](https://github.com/kuxiaowo/AIpet-Murasame) 的演示视频，
