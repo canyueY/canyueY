@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/canyueY">
-    <img src="https://readme-typing-svg.demolab.com?font=IBM+Plex+Mono&weight=600&size=34&duration=2600&pause=1100&color=4F8EF7&center=true&vCenter=true&width=520&height=52&lines=canyueY" alt="canyueY" />
+    <img src="https://readme-typing-svg.demolab.com?font=IBM+Plex+Mono&weight=600&size=34&duration=2600&pause=1100&color=4F8EF7&center=true&vCenter=true&width=520&height=52&lines=胃疾癣" alt="胃疾癣" />
   </a>
 </p>
 
