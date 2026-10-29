@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>Python 桌面应用 · Live2D 集成 · AI 角色交互 · DeepSeek Harness 插件</strong><br>
+  <strong>Python 桌面应用 · Live2D 集成 · AI 角色交互 · DeepSeek Harness 插件 · 演化记忆</strong><br>
   <sub>把桌宠里能复用的部分拆成独立开源库，再做成可安装的 dsh 插件</sub>
 </p>
 
@@ -84,19 +84,39 @@ DPI 上下文。
 
 托管在组织 [DSH-Raising-Plan](https://github.com/DSH-Raising-Plan)。
 
-对应上面四个 Python 库的 **独立 npm 插件包**（分支 `plugin/dsh`），可直接：
+对应上面这些组件的 **独立 npm 插件包**（分支 `plugin/dsh`），可直接：
 
 ```bash
 dsh plugin --profile web add github:canyueY/<包名>#plugin/dsh
 ```
 
+### 🧠 [Mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne) · 演化记忆系统
+
+`dsh-mnemosyne`（原 `dsh-cognitive-memory`）不是“多存一点事实”的记忆库，而是为长期陪伴准备的一套**可追溯、可演化、可纠错**的记忆基础设施：
+
+- **证据**：区分直接观察、当事人表达、外部来源与模型推断；
+- **时间**：事件时间、记录时间、有效时间、确认时间；
+- **状态**：偏好与关系会变化，旧状态不必被新状态覆盖；
+- **情绪**：情绪是事件上下文的一部分，不是给人的固定标签；
+- **纠错**：新证据可以修正旧判断，而不是只增不减。
+
+组织仓：**[DSH-Raising-Plan/dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)**  
+个人镜像：**[canyueY/dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)**
+
 | 插件 | 对应能力 | 主要工具 |
 | :--- | :--- | :--- |
 | **[dsh-agent-gate](https://github.com/DSH-Raising-Plan/dsh-agent-gate)** | 权限闸门 | `gate_check` / `gate_check_path` / `gate_policy` |
 | **[dsh-context-budget](https://github.com/DSH-Raising-Plan/dsh-context-budget)** | 上下文裁剪 | `trim_context` / `estimate_context_tokens` |
+| **[dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)** | 演化记忆：证据 / 时间 / 情绪 / 纠错 | `memory_search` / `memory_context` / `memory_observe` / `memory_feedback` |
 | **[dsh-window-locator](https://github.com/DSH-Raising-Plan/dsh-window-locator)** | 显示器 / 前台窗 | `list_monitors` / `foreground_window` / `desktop_snapshot` |
 | **[dsh-netease-cdp](https://github.com/DSH-Raising-Plan/dsh-netease-cdp)** | 网易云控制 | `netease_probe` / `netease_now_playing` / `netease_play` / `next` / `prev` |
 | **[dsh-video-storyboard-hp · 高性能版](https://github.com/DSH-Raising-Plan/dsh-video-storyboard-hp)** | 视频分镜高性能版（fork，见 feature/high-performance） | `video_storyboard` / `video_zoom` / `video_probe` |
+
+Mnemosyne 的安装入口与其余组件不同（默认分支 `main`）：
+
+```bash
+dsh plugin --profile web add github:DSH-Raising-Plan/dsh-mnemosyne#main
+```
 
 形态对齐官方插件约定：`package.json` 的 `dsh.bundle` + `cordis.patch.yml` + `defineTool`。
 `agent-gate` / `context-budget` 为纯 JS 移植；`window-locator` 经 PowerShell 调 Win32（物理像素）；
@@ -133,6 +153,12 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 ## 📓 开发日志
 
 > 桌宠最近在做的事。仓库暂为私有，这里只写能落地验证的部分。
+
+### 2026-10-29 · dsh-cognitive-memory 正式改名 Mnemosyne
+
+项目从 `dsh-cognitive-memory` 更名为 **Mnemosyne / `dsh-mnemosyne`**：仓库、npm 包、DSH 插件 ID、Python 服务模块（`mnemosyne`）与文档全部同步；旧配置键、旧环境变量和旧数据目录保留迁移兼容。
+
+同时把定位从“认知记忆插件”抬到“**DSH 演化记忆系统**”：不只记录事实，还要处理证据来源、有效时间、状态变化、情绪事件与后续纠错。组织仓与个人镜像均已同步。
 
 ### 2026-10-28 · 四个组件做成 DeepSeek Harness 插件
 
