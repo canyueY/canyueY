@@ -242,9 +242,7 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
   <img src="https://img.shields.io/badge/Python-JS-3776AB?logo=python&logoColor=white" alt="Python / JS">
   <img src="https://img.shields.io/github/last-commit/canyueY/dsh-agent-gate?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
 </p>
-> 数字口径：**392** = 五个 Python 包 `tests/` 下可独立运行的测试函数总数
-> （`pyqt-live2d-bridge` 是自跑的自检脚本，按 `check()` 项计）。
-> dsh 插件另有各自的 `node --test`，未计入该数字。
+
 
 ## 🧰 技术栈
 
