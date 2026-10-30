@@ -13,6 +13,17 @@
 
 ---
 
+## 🆕 最近更新
+
+| 日期 | 更新 |
+| --- | --- |
+| 2026-10-31 | **Mnemosyne 2.0** 成为个人认知基础设施的权威 Node；`canyueY/mnemosyne` 公开；Memory Bank 拆为独立数据目录并发布说明仓 |
+| 2026-10-31 | **肥鱼 Live2D 模型渲染插件** 发布：复用原 MurasamePet Lite 的 PyQt + Cubism + 文字框 + 大肥鱼模型，绑定 DSH |
+| 2026-10-31 | `dsh-chat-memory-ingest`：微信/QQ 已导出聊天 → 记忆管线 |
+| 2026-10-30 | Mnemosyne 经验闭环：图式演化、反馈学习、可选语义空间 |
+
+---
+
 ## 📦 开源组件（Python）
 
 从桌宠项目里剥出来的通用件。每个都能单独用，不依赖桌宠本体。
@@ -90,39 +101,56 @@ DPI 上下文。
 dsh plugin --profile web add github:canyueY/<包名>#plugin/dsh
 ```
 
-### 🧠 [Mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne) · 演化记忆系统
+### 🧠 [Mnemosyne](https://github.com/canyueY/mnemosyne) · 个人认知基础设施
 
-`dsh-mnemosyne`（原 `dsh-cognitive-memory`）不是“多存一点事实”的记忆库，而是为长期陪伴准备的一套**可追溯、可演化、可纠错**的记忆基础设施：
+Mnemosyne 不是“多存一点事实”的记忆库，而是个人长期认知的**权威层**：
 
 - **证据**：区分直接观察、当事人表达、外部来源与模型推断；
-- **时间**：事件时间、记录时间、有效时间、确认时间；
+- **时间**：事件 / 记录 / 有效 / 确认四种时间；
 - **状态**：偏好与关系会变化，旧状态不必被新状态覆盖；
-- **情绪**：情绪是事件上下文的一部分，不是给人的固定标签；
-- **纠错**：新证据可以修正旧判断，而不是只增不减。
+- **情绪**：情绪是事件上下文，不是固定标签；
+- **纠错**：新证据可以修正旧判断；
+- **图式演化**：同化 / 顺应 / 冲突 / 平衡；
+- **反馈学习**：用户明确反馈、实际结果、Agent 自评分开。
 
-组织仓：**[DSH-Raising-Plan/dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)**  
-个人镜像：**[canyueY/dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)**
+**2.0 权威仓：** [canyueY/mnemosyne](https://github.com/canyueY/mnemosyne)  
+**数据层说明：** [canyueY/mnemosyne-memory-bank](https://github.com/canyueY/mnemosyne-memory-bank)（没有独立数据库）  
+**DSH 旧壳：** [DSH-Raising-Plan/dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)（Legacy，不作 2.0 标尺）
+
+```bash
+pip install -e ".[dev]"
+mnemosyne doctor
+mnemosyne start --data-dir "%LOCALAPPDATA%\Mnemosyne Memory Bank"
+```
+
+### 🖥️ [肥鱼 Live2D 模型渲染插件](https://github.com/canyueY/live2d-renderer-plugin) · 现有桌宠绑定 DSH
+
+不重写渲染器，复用原 MurasamePet Lite 的 PyQt + Live2D Cubism + 文字框 + 大肥鱼基础模型；插件负责启动/停止、人物/文字显示模式、文字比例，以及副屏 DPI 修复。
+
+```bash
+dsh plugin --profile desktop add 'dsh-murasame-pet@github:canyueY/live2d-renderer-plugin#v0.1.0'
+```
+
+发布包：`MurasamePetLite-0.1.0-win64.zip`；控制面板在 DSH「插件 → dsh-murasame-pet」。
+
+### 💬 [dsh-chat-memory-ingest](https://github.com/DSH-Raising-Plan/dsh-chat-memory-ingest) · 微信/QQ 聊天进记忆
+
+把**已经导出**的微信 / QQ 聊天记录同步到 inbox，按主人/他人分流后交给记忆管线；不解密私有库，不内置导出工具。
+
+### 🔌 DSH 插件总表
 
 | 插件 | 对应能力 | 主要工具 |
 | :--- | :--- | :--- |
 | **[dsh-agent-gate](https://github.com/DSH-Raising-Plan/dsh-agent-gate)** | 权限闸门 | `gate_check` / `gate_check_path` / `gate_policy` |
 | **[dsh-context-budget](https://github.com/DSH-Raising-Plan/dsh-context-budget)** | 上下文裁剪 | `trim_context` / `estimate_context_tokens` |
-| **[dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)** | 演化记忆：证据 / 时间 / 情绪 / 纠错 | `memory_search` / `memory_context` / `memory_observe` / `memory_feedback` |
+| **[dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)** | 演化记忆（Legacy DSH 壳） | `memory_search` / `memory_context` / `memory_observe` / `memory_feedback` |
 | **[dsh-window-locator](https://github.com/DSH-Raising-Plan/dsh-window-locator)** | 显示器 / 前台窗 | `list_monitors` / `foreground_window` / `desktop_snapshot` |
 | **[dsh-netease-cdp](https://github.com/DSH-Raising-Plan/dsh-netease-cdp)** | 网易云控制 | `netease_probe` / `netease_now_playing` / `netease_play` / `next` / `prev` |
-| **[dsh-video-storyboard-hp · 高性能版](https://github.com/DSH-Raising-Plan/dsh-video-storyboard-hp)** | 视频分镜高性能版（fork，见 feature/high-performance） | `video_storyboard` / `video_zoom` / `video_probe` |
+| **[dsh-video-storyboard-hp](https://github.com/DSH-Raising-Plan/dsh-video-storyboard-hp)** | 视频分镜高性能版 | `video_storyboard` / `video_zoom` / `video_probe` |
+| **[dsh-chat-memory-ingest](https://github.com/DSH-Raising-Plan/dsh-chat-memory-ingest)** | 微信/QQ 导入 | `im_status` / `im_sync_*` / `im_preview` / `im_import` |
+| **[live2d-renderer-plugin](https://github.com/canyueY/live2d-renderer-plugin)** | 桌面角色绑定 | `pet_start` / `pet_set_visibility` / `pet_set_scale` |
 
-Mnemosyne 的安装入口与其余组件不同（默认分支 `main`）：
-
-```bash
-dsh plugin --profile web add github:DSH-Raising-Plan/dsh-mnemosyne#main
-```
-
-形态对齐官方插件约定：`package.json` 的 `dsh.bundle` + `cordis.patch.yml` + `defineTool`。
-`agent-gate` / `context-budget` 为纯 JS 移植；`window-locator` 经 PowerShell 调 Win32（物理像素）；
-`netease-cdp` 用 Node `ws` 直连 CDP。许可仍为 AGPL-3.0-or-later。
-
----
+记忆权威入口是 `canyueY/mnemosyne`，不是旧 `dsh-mnemosyne` 插件壳。许可与运行边界见各仓库 README。
 
 ## 🚀 主要项目
 
@@ -151,6 +179,18 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 ---
 
 ## 📓 开发日志
+
+### 2026-10-31 · Mnemosyne 2.0 / Memory Bank 分界
+
+- 权威仓改为 [`canyueY/mnemosyne`](https://github.com/canyueY/mnemosyne)；
+- 代码仓与 `Mnemosyne Memory Bank` 数据目录分离，旧的 `%LOCALAPPDATA%\DSH\cognitive-memory` 迁出并归档；
+- README / Matrix / Readiness 增加权威仓声明；`dsh-mnemosyne` 明确为 Legacy 壳。
+
+### 2026-10-31 · 肥鱼 Live2D 模型渲染插件
+
+- 复用 MurasamePet Lite 的现有渲染器，不再重写 Live2D；
+- DSH 插件负责启动、显示模式与文字比例；
+- 修复副屏缩放时模型被裁：PerMonitorV2 + 物理像素视口。
 
 > 桌宠最近在做的事。仓库暂为私有，这里只写能落地验证的部分。
 
@@ -240,7 +280,7 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
   <img src="https://img.shields.io/github/stars/canyueY?label=Stars&color=4F8EF7&labelColor=0d1117" alt="Stars">
   <img src="https://img.shields.io/github/followers/canyueY?label=Followers&color=4F8EF7&labelColor=0d1117" alt="Followers">
   <img src="https://img.shields.io/badge/Python-JS-3776AB?logo=python&logoColor=white" alt="Python / JS">
-  <img src="https://img.shields.io/github/last-commit/canyueY/dsh-agent-gate?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
+  <img src="https://img.shields.io/github/last-commit/canyueY/mnemosyne?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
 </p>
 
 
