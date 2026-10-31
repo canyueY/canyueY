@@ -17,6 +17,8 @@
 
 | 日期 | 更新 |
 | --- | --- |
+| 2026-10-31 | **Mnemosyne Music Acquisition** 0.5.0：网易云音乐采集、证据上行、Claim 映射与可选播放桥 |
+| 2026-10-31 | **dsh-anime-guide**：新番表、Bangumi / MAL 评分榜与国内外差异对照 |
 | 2026-10-31 | **Mnemosyne 3.0** 合并进 `canyueY/dsh-mnemosyne`；Node 与 DSH 插件同仓维护，Memory Bank 仍为独立数据目录 |
 | 2026-10-31 | **肥鱼 Live2D 模型渲染插件** 发布：复用原 MurasamePet Lite 的 PyQt + Cubism + 文字框 + 大肥鱼模型，绑定 DSH |
 | 2026-10-31 | `dsh-chat-memory-ingest`：微信/QQ 已导出聊天 → 记忆管线 |
@@ -24,7 +26,19 @@
 
 ---
 
-## 📦 开源组件（Python）
+## 🧭 项目地图
+
+| 层 | 项目 | 作用 |
+| :--- | :--- | :--- |
+| 认知核心 | **[dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)** | 证据、Claim、图式、反馈与长期认知 |
+| 记忆数据 | **[mnemosyne-memory-bank](https://github.com/canyueY/mnemosyne-memory-bank)** | Memory Bank 的数据组织与边界说明 |
+| 领域组件 | **[mnemosyne-music-acquisition](https://github.com/canyueY/mnemosyne-music-acquisition)** | 网易云 → Snapshot → Evidence → Mnemosyne |
+| DSH 插件 | **[DSH-Raising-Plan](https://github.com/DSH-Raising-Plan)** | 把能力包装成可安装的 DSH 插件 |
+| Python 基础件 | agent-gate / window-locator / netease-cdp / context-budget / pyqt-live2d-bridge | 可单独复用的桌面与 Agent 组件 |
+
+---
+
+## 🧩 Python 组件
 
 从桌宠项目里剥出来的通用件。每个都能单独用，不依赖桌宠本体。
 
@@ -36,7 +50,7 @@
 | **[context-budget](https://github.com/canyueY/context-budget)** | 把对话历史裁到 token 预算内，保留人设丢掉最旧的轮次 | AGPL-3.0 |
 | **[pyqt-live2d-bridge](https://github.com/canyueY/pyqt-live2d-bridge)** | 在 PyQt5 里渲染 Live2D Cubism，只给引擎不给窗口部件 | MIT |
 
-### 🛡️ [agent-gate](https://github.com/canyueY/agent-gate) · 零依赖 · 73 项测试
+### 🛡️ [agent-gate](https://github.com/canyueY/agent-gate) · 零依赖 · 97 项测试
 
 多数 Agent 框架的工具注册表里 `risk` 字段早就定义了，却**没有任何一处读它**——
 工具一旦注册就会被无条件执行。对一个能读你屏幕、还要碰你文件的常驻进程来说，
@@ -66,7 +80,7 @@ DPI 上下文。
 测试不需要真的开客户端：`tests/conftest.py` 里是一个真的 HTTP + WebSocket
 假 CDP 服务器，所以 JSON 组包、`id` 匹配、事件插播跳过、超时都真的被执行到。
 
-### 🧠 [context-budget](https://github.com/canyueY/context-budget) · 零依赖 · 52 项测试
+### 🧠 [context-budget](https://github.com/canyueY/context-budget) · 零依赖 · 58 项测试
 
 对话历史只增不减，而上下文窗口有限。朴素的 `history[-20:]` 会把一问一答拆散，
 让模型看到"助手回答了但用户没问过"。这个包按**轮**裁、按**预算**裁，并明确保证：
@@ -90,6 +104,21 @@ DPI 上下文。
 就继续沿用 AGPL，不做改许可。
 
 ---
+
+## 🎵 Mnemosyne 生态
+
+### [Mnemosyne Music Acquisition](https://github.com/canyueY/mnemosyne-music-acquisition) · 网易云 → 认知
+
+把网易云里的红心 / 歌单 / 日推 / 播放历史 / 收藏歌手，变成可追溯的 Snapshot 与 Evidence，再交给 Mnemosyne 形成长期音乐认知。
+
+- **版本 0.5.0 / Beta+**：P0/P1 已闭合；仍非多源 GA
+- **仅网易云**：源适配器可扩展，但仓库内未实现 QQ / Spotify / Apple Music
+- QR 扫码或 config-bind；Cookie 使用 Fernet 加密落盘
+- **收藏 ≠ 喜欢**：`saves` 是 observed，`likes` 只由显式确认写入
+- 日推曝光只进 catalog，不进长期偏好
+- 可选播放桥：依赖 Murasame / netease-cdp；无客户端时返回 `PLAYBACK_UNSUPPORTED`
+
+[仓库](https://github.com/canyueY/mnemosyne-music-acquisition) · [能力矩阵](https://github.com/canyueY/mnemosyne-music-acquisition/blob/main/docs/MUSIC_SOURCE_CAPABILITY_MATRIX.md)
 
 ## 🔌 DeepSeek Harness 插件
 
@@ -146,6 +175,7 @@ dsh plugin --profile desktop add 'dsh-murasame-pet@github:canyueY/live2d-rendere
 | **[dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)** | 演化记忆（Legacy DSH 壳） | `memory_search` / `memory_context` / `memory_observe` / `memory_feedback` |
 | **[dsh-window-locator](https://github.com/DSH-Raising-Plan/dsh-window-locator)** | 显示器 / 前台窗 | `list_monitors` / `foreground_window` / `desktop_snapshot` |
 | **[dsh-netease-cdp](https://github.com/DSH-Raising-Plan/dsh-netease-cdp)** | 网易云控制 | `netease_probe` / `netease_now_playing` / `netease_play` / `next` / `prev` |
+| **[dsh-anime-guide](https://github.com/canyueY/dsh-anime-guide)** | 新番 / 评分榜 | `anime_season` / `anime_ratings` / `anime_search` / `anime_recommend` / `anime_contrast` |
 | **[dsh-video-storyboard-hp](https://github.com/DSH-Raising-Plan/dsh-video-storyboard-hp)** | 视频分镜高性能版 | `video_storyboard` / `video_zoom` / `video_probe` |
 | **[dsh-chat-memory-ingest](https://github.com/DSH-Raising-Plan/dsh-chat-memory-ingest)** | 微信/QQ 导入 | `im_status` / `im_sync_*` / `im_preview` / `im_import` |
 | **[live2d-renderer-plugin](https://github.com/canyueY/live2d-renderer-plugin)** | 桌面角色绑定 | `pet_start` / `pet_set_visibility` / `pet_set_scale` |
@@ -298,3 +328,8 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 ## 📫 联系
 
 - GitHub: [@canyueY](https://github.com/canyueY)
+
+
+---
+
+> **为什么还要开发 Mnemosyne？** [阅读全文 →](WHY_MNEMOSYNE.md)
