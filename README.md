@@ -17,7 +17,7 @@
 
 | 日期 | 更新 |
 | --- | --- |
-| 2026-10-31 | **Mnemosyne 2.0** 成为个人认知基础设施的权威 Node；`canyueY/mnemosyne` 公开；Memory Bank 拆为独立数据目录并发布说明仓 |
+| 2026-10-31 | **Mnemosyne 3.0** 合并进 `canyueY/dsh-mnemosyne`；Node 与 DSH 插件同仓维护，Memory Bank 仍为独立数据目录 |
 | 2026-10-31 | **肥鱼 Live2D 模型渲染插件** 发布：复用原 MurasamePet Lite 的 PyQt + Cubism + 文字框 + 大肥鱼模型，绑定 DSH |
 | 2026-10-31 | `dsh-chat-memory-ingest`：微信/QQ 已导出聊天 → 记忆管线 |
 | 2026-10-30 | Mnemosyne 经验闭环：图式演化、反馈学习、可选语义空间 |
@@ -101,7 +101,7 @@ DPI 上下文。
 dsh plugin --profile web add github:canyueY/<包名>#plugin/dsh
 ```
 
-### 🧠 [Mnemosyne](https://github.com/canyueY/mnemosyne) · 个人认知基础设施
+### 🧠 [Mnemosyne](https://github.com/canyueY/dsh-mnemosyne) · 个人认知基础设施
 
 Mnemosyne 不是“多存一点事实”的记忆库，而是个人长期认知的**权威层**：
 
@@ -113,7 +113,7 @@ Mnemosyne 不是“多存一点事实”的记忆库，而是个人长期认知�
 - **图式演化**：同化 / 顺应 / 冲突 / 平衡；
 - **反馈学习**：用户明确反馈、实际结果、Agent 自评分开。
 
-**2.0 权威仓：** [canyueY/mnemosyne](https://github.com/canyueY/mnemosyne)  
+**3.0 权威仓：** [canyueY/dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)  
 **数据层说明：** [canyueY/mnemosyne-memory-bank](https://github.com/canyueY/mnemosyne-memory-bank)（没有独立数据库）  
 **DSH 旧壳：** [DSH-Raising-Plan/dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)（Legacy，不作 2.0 标尺）
 
@@ -150,7 +150,7 @@ dsh plugin --profile desktop add 'dsh-murasame-pet@github:canyueY/live2d-rendere
 | **[dsh-chat-memory-ingest](https://github.com/DSH-Raising-Plan/dsh-chat-memory-ingest)** | 微信/QQ 导入 | `im_status` / `im_sync_*` / `im_preview` / `im_import` |
 | **[live2d-renderer-plugin](https://github.com/canyueY/live2d-renderer-plugin)** | 桌面角色绑定 | `pet_start` / `pet_set_visibility` / `pet_set_scale` |
 
-记忆权威入口是 `canyueY/mnemosyne`，不是旧 `dsh-mnemosyne` 插件壳。许可与运行边界见各仓库 README。
+记忆权威入口是 `canyueY/dsh-mnemosyne` 的 `service/`；根目录适配层只负责 DSH 接入。许可与运行边界见各仓库 README。
 
 ## 🚀 主要项目
 
@@ -182,7 +182,7 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 
 ### 2026-10-31 · Mnemosyne 2.0 / Memory Bank 分界
 
-- 权威仓改为 [`canyueY/mnemosyne`](https://github.com/canyueY/mnemosyne)；
+- 权威仓改为 [`canyueY/dsh-mnemosyne`](https://github.com/canyueY/dsh-mnemosyne)（3.0 合并仓）；
 - 代码仓与 `Mnemosyne Memory Bank` 数据目录分离，旧的 `%LOCALAPPDATA%\DSH\cognitive-memory` 迁出并归档；
 - README / Matrix / Readiness 增加权威仓声明；`dsh-mnemosyne` 明确为 Legacy 壳。
 
@@ -280,7 +280,7 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
   <img src="https://img.shields.io/github/stars/canyueY?label=Stars&color=4F8EF7&labelColor=0d1117" alt="Stars">
   <img src="https://img.shields.io/github/followers/canyueY?label=Followers&color=4F8EF7&labelColor=0d1117" alt="Followers">
   <img src="https://img.shields.io/badge/Python-JS-3776AB?logo=python&logoColor=white" alt="Python / JS">
-  <img src="https://img.shields.io/github/last-commit/canyueY/mnemosyne?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
+  <img src="https://img.shields.io/github/last-commit/canyueY/dsh-mnemosyne?label=最近提交&color=4F8EF7&labelColor=0d1117" alt="最近提交">
 </p>
 
 
