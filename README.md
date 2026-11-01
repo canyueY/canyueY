@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <strong>Python 桌面应用 · Live2D 集成 · AI 角色交互 · DeepSeek Harness 插件 · 演化记忆</strong><br>
+  <strong>Python 桌面应用 · Live2D 集成 · AI 角色交互 · DeepSeek Harness 插件 · 演化记忆 · 组件开发模板</strong><br>
   <sub>把桌宠里能复用的部分拆成独立开源库，再做成可安装的 dsh 插件</sub>
 </p>
 
@@ -17,9 +17,11 @@
 
 | 日期 | 更新 |
 | --- | --- |
+| 2026-11-01 | **[Mnemosyne Acquisition Component Template](https://github.com/canyueY/mnemosyne-acquisition-component-template)** 0.1.0：无运行时、无平台采集器的信息获取组件开发模板，附 Agent 开发指令与 13 项边界测试 |
+| 2026-11-01 | **Mnemosyne 2.0** 统一仓与 DSH 安装/迁移工程包：补齐 settings、preset、MCP 接口面 |
 | 2026-10-31 | **Mnemosyne Music Acquisition** 0.5.0：网易云音乐采集、证据上行、Claim 映射与可选播放桥 |
 | 2026-10-31 | **dsh-anime-guide**：新番表、Bangumi / MAL 评分榜与国内外差异对照 |
-| 2026-10-31 | **Mnemosyne 3.0** 合并进 `canyueY/dsh-mnemosyne`；Node 与 DSH 插件同仓维护，Memory Bank 仍为独立数据目录 |
+| 2026-10-31 | **Mnemosyne 2.0** 统一进 `canyueY/dsh-mnemosyne`；Node 与 DSH 插件同仓维护，Memory Bank 仍为独立数据目录 |
 | 2026-10-31 | **肥鱼 Live2D 模型渲染插件** 发布：复用原 MurasamePet Lite 的 PyQt + Cubism + 文字框 + 大肥鱼模型，绑定 DSH |
 | 2026-10-31 | `dsh-chat-memory-ingest`：微信/QQ 已导出聊天 → 记忆管线 |
 | 2026-10-30 | Mnemosyne 经验闭环：图式演化、反馈学习、可选语义空间 |
@@ -33,6 +35,7 @@
 | 认知核心 | **[dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)** | 证据、Claim、图式、反馈与长期认知 |
 | 记忆数据 | **[mnemosyne-memory-bank](https://github.com/canyueY/mnemosyne-memory-bank)** | Memory Bank 的数据组织与边界说明 |
 | 领域组件 | **[mnemosyne-music-acquisition](https://github.com/canyueY/mnemosyne-music-acquisition)** | 网易云 → Snapshot → Evidence → Mnemosyne |
+| 开发模板 | **[mnemosyne-acquisition-component-template](https://github.com/canyueY/mnemosyne-acquisition-component-template)** | 无能力、无运行时的采集组件骨架与 Agent 开发指令 |
 | DSH 插件 | **[DSH-Raising-Plan](https://github.com/DSH-Raising-Plan)** | 把能力包装成可安装的 DSH 插件 |
 | Python 基础件 | agent-gate / window-locator / netease-cdp / context-budget / pyqt-live2d-bridge | 可单独复用的桌面与 Agent 组件 |
 
@@ -120,6 +123,18 @@ DPI 上下文。
 
 [仓库](https://github.com/canyueY/mnemosyne-music-acquisition) · [能力矩阵](https://github.com/canyueY/mnemosyne-music-acquisition/blob/main/docs/MUSIC_SOURCE_CAPABILITY_MATRIX.md)
 
+## 🧪 开发模板
+
+### [Mnemosyne Acquisition Component Template](https://github.com/canyueY/mnemosyne-acquisition-component-template) · 0.1.0 · MIT
+
+给 Mnemosyne 生态补来源组件的**开发模板**，不是运行时组件：
+
+- **故意保持无能力**：没有 QQ / B站 / 音乐采集器，不联网、不登录、不读配置或凭证、不入库；
+- 提供接口骨架、数据类型、抽象端口、显式失败的桩，以及来源 / 数据 / 桥接 / 阈值 / 验收文档；
+- 可直接交给 Agent 的 [开发指令](https://github.com/canyueY/mnemosyne-acquisition-component-template/blob/main/docs/AGENT_PROMPT.md)；
+- 13 项离线测试只证明“模板无能力”，不证明任何平台已适配；
+- 源码模板 zip、wheel、sdist 在 [Releases](https://github.com/canyueY/mnemosyne-acquisition-component-template/releases/tag/v0.1.0) 提供。
+
 ## 🔌 DeepSeek Harness 插件
 
 托管在组织 [DSH-Raising-Plan](https://github.com/DSH-Raising-Plan)。
@@ -142,7 +157,8 @@ Mnemosyne 不是“多存一点事实”的记忆库，而是个人长期认知�
 - **图式演化**：同化 / 顺应 / 冲突 / 平衡；
 - **反馈学习**：用户明确反馈、实际结果、Agent 自评分开。
 
-**3.0 权威仓：** [canyueY/dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)  
+**2.0 权威仓：** [canyueY/dsh-mnemosyne](https://github.com/canyueY/dsh-mnemosyne)<br>
+**DSH 安装/接口适配：** [DSH_INTEGRATION.md](https://github.com/canyueY/dsh-mnemosyne/blob/main/DSH_INTEGRATION.md)<br>
 **数据层说明：** [canyueY/mnemosyne-memory-bank](https://github.com/canyueY/mnemosyne-memory-bank)（没有独立数据库）  
 **DSH 旧壳：** [DSH-Raising-Plan/dsh-mnemosyne](https://github.com/DSH-Raising-Plan/dsh-mnemosyne)（Legacy，不作 2.0 标尺）
 
@@ -210,9 +226,16 @@ Minecraft 1.12.2 的女仆模组 Firis 补丁（fork）。
 
 ## 📓 开发日志
 
+### 2026-11-01 · Acquisition Component Template
+
+- 新增 [`mnemosyne-acquisition-component-template`](https://github.com/canyueY/mnemosyne-acquisition-component-template)：无运行时、无平台采集器的信息获取组件开发模板；
+- 提供接口骨架、数据类型、抽象端口与显式失败的桩，以及完整的 Agent 开发指令和验收清单；
+- 13 项离线测试只证明“模板保持无能力”，不证明任何平台已适配；
+- `v0.1.0` 已发布，源码模板 zip / wheel / sdist 在 Release 提供。
+
 ### 2026-10-31 · Mnemosyne 2.0 / Memory Bank 分界
 
-- 权威仓改为 [`canyueY/dsh-mnemosyne`](https://github.com/canyueY/dsh-mnemosyne)（3.0 合并仓）；
+- 权威仓改为 [`canyueY/dsh-mnemosyne`](https://github.com/canyueY/dsh-mnemosyne)（2.0 统一仓）；
 - 代码仓与 `Mnemosyne Memory Bank` 数据目录分离，旧的 `%LOCALAPPDATA%\DSH\cognitive-memory` 迁出并归档；
 - README / Matrix / Readiness 增加权威仓声明；`dsh-mnemosyne` 明确为 Legacy 壳。
 
